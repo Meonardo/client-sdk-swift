@@ -32,12 +32,16 @@ public class ScreenShareCaptureOptions: NSObject, VideoCaptureOptions {
     public let useBroadcastExtension: Bool
 
     @objc
+    public let useExtBroadcastExtension: Bool
+
+    @objc
     public let includeCurrentApplication: Bool
 
     public init(dimensions: Dimensions = .h1080_169,
                 fps: Int = 30,
                 showCursor: Bool = true,
                 useBroadcastExtension: Bool = false,
+                useExtBroadcastExtension: Bool = true,
                 includeCurrentApplication: Bool = false)
     {
         self.dimensions = dimensions
@@ -45,6 +49,7 @@ public class ScreenShareCaptureOptions: NSObject, VideoCaptureOptions {
         self.showCursor = showCursor
         self.useBroadcastExtension = useBroadcastExtension
         self.includeCurrentApplication = includeCurrentApplication
+        self.useExtBroadcastExtension = useExtBroadcastExtension
     }
 
     // MARK: - Equal

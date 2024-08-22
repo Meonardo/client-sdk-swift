@@ -25,7 +25,7 @@ internal import LiveKitWebRTC
 private extension Array where Element: LKRTCVideoCodecInfo {
     func rewriteCodecsIfNeeded() -> [LKRTCVideoCodecInfo] {
         // rewrite H264's profileLevelId to 42e032
-        let codecs = map { $0.name == kRTCVideoCodecH264Name ? RTC.h264BaselineLevel5CodecInfo : $0 }
+        let codecs = map { $0.name == kRTCVideoCodecH264Name ? RTC.h264HighLevel52CodecInfo : $0 }
         // logger.log("supportedCodecs: \(codecs.map({ "\($0.name) - \($0.parameters)" }).joined(separator: ", "))", type: Engine.self)
         return codecs
     }
@@ -55,6 +55,20 @@ class RTC {
     static let h264BaselineLevel5CodecInfo: LKRTCVideoCodecInfo = {
         // this should never happen
         guard let profileLevelId = LKRTCH264ProfileLevelId(profile: .constrainedBaseline, level: .level5) else {
+            logger.log("failed to generate profileLevelId", .error, type: Room.self)
+            fatalError("failed to generate profileLevelId")
+        }
+
+        // create a new H264 codec with new profileLevelId
+        return LKRTCVideoCodecInfo(name: kRTCH264CodecName,
+                                   parameters: ["profile-level-id": profileLevelId.hexString,
+                                                "level-asymmetry-allowed": "1",
+                                                "packetization-mode": "1"])
+    }()
+
+    static let h264HighLevel52CodecInfo: LKRTCVideoCodecInfo = {
+        // this should never happen
+        guard let profileLevelId = LKRTCH264ProfileLevelId(profile: .high, level: .level5_2) else {
             logger.log("failed to generate profileLevelId", .error, type: Room.self)
             fatalError("failed to generate profileLevelId")
         }
