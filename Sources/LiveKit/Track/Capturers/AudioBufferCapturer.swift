@@ -21,8 +21,9 @@ public class AudioBufferCapturer: AudioCapturer {
     }
 
     /// Capture a ``Data``.
-    public func capture(data: Data, sampleRate: UInt, bitsPerChannel: UInt, channels: UInt, samplePerBuffer: UInt) {
-        capture(data: data, sampleRate: sampleRate, bitsPerChannel: bitsPerChannel, channels: channels, samplePerBuffer: samplePerBuffer, capturer: capturer)
+    public func capture(_ data: UnsafeMutableRawPointer, sampleRate: UInt, bitsPerSample: UInt, 
+        channels: UInt, numberOfFrames: UInt) {
+        capture(data: data, sampleRate: sampleRate, bitsPerSample: bitsPerSample, channels: channels, numberOfFrames: numberOfFrames, capturer: capturer)
     }
 }
 

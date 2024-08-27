@@ -50,12 +50,12 @@ public class AudioCapturer: NSObject, Loggable, AudioCapturerProtocol {
 extension AudioCapturer {
     // Capture a CMSampleBuffer
     func capture(sampleBuffer: CMSampleBuffer, capturer: LKRTCAudioCapturer) {
-        
+        delegate?.capturer?(capturer, didCaptureAudioSampleBuffer: sampleBuffer)
     }
 
     // Capture a Data buffer
-    func capture(data: Data, sampleRate: UInt, bitsPerChannel: UInt, 
-    channels: UInt, samplePerBuffer: UInt, capturer: LKRTCAudioCapturer) {
-        
+    func capture(data: UnsafeMutableRawPointer, sampleRate: UInt, bitsPerSample: UInt, 
+    channels: UInt, numberOfFrames: UInt, capturer: LKRTCAudioCapturer) {
+        delegate?.capturer(capturer, didCaptureAudioFrame: data, withSampleRate: sampleRate, bitsPerSample: bitsPerSample, numberOfChannels: channels, numberOfFrames: numberOfFrames)
     }
 }
