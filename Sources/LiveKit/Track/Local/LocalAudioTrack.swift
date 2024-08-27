@@ -25,6 +25,11 @@ internal import LiveKitWebRTC
 
 @objc
 public class LocalAudioTrack: Track, LocalTrack, AudioTrack {
+    @objc
+    public internal(set) var capturer: AudioCapturer
+
+    var audioSource: LKRTCAudioBufferSource
+
     /// ``AudioCaptureOptions`` used to create this track.
     let captureOptions: AudioCaptureOptions
 
@@ -40,6 +45,24 @@ public class LocalAudioTrack: Track, LocalTrack, AudioTrack {
                    kind: .audio,
                    source: source,
                    track: track,
+                   reportStatistics: reportStatistics)
+    }
+
+    init (name: String,
+          source: Track.Source,
+          capturer: AudioCapturer,
+          audioSource: LKRTCAudioBufferSource,
+          reportStatistics: Bool)
+    {
+        self.capturer = capturer
+        self.audioSource = audioSource
+
+        let rtcTrack = RTC.createAudioTrack(source: audioSource)
+
+        super.init(name: name,
+                   kind: .audio,
+                   source: source,
+                   track: rtcTrack,
                    reportStatistics: reportStatistics)
     }
 

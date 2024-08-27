@@ -136,7 +136,16 @@ class RTC {
         DispatchQueue.liveKitWebRTC.sync { peerConnectionFactory.audioSource(with: constraints) }
     }
 
+    static func createAudioBufferSource(_ constraints: LKRTCMediaConstraints?) -> LKRTCAudioBufferSource {
+        DispatchQueue.liveKitWebRTC.sync { peerConnectionFactory.audioBufferSource() }
+    }
+
     static func createAudioTrack(source: LKRTCAudioSource) -> LKRTCAudioTrack {
+        DispatchQueue.liveKitWebRTC.sync { peerConnectionFactory.audioTrack(with: source,
+                                                                            trackId: UUID().uuidString) }
+    }
+
+    static func createAudioTrack(source: LKRTCAudioBufferSource) -> LKRTCAudioTrack {
         DispatchQueue.liveKitWebRTC.sync { peerConnectionFactory.audioTrack(with: source,
                                                                             trackId: UUID().uuidString) }
     }
