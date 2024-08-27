@@ -11,7 +11,7 @@ internal import LiveKitWebRTC
 public class AudioBufferCapturer: AudioCapturer {
     private let capturer = RTC.createAudioCapturer()
 
-    override init(delegate: LKRTCAudioCapturerDelegate) {
+    init(delegate: LKRTCAudioCapturerDelegate, options: AudioCaptureOptions = AudioCaptureOptions()) {
         super.init(delegate: delegate)
     }
 

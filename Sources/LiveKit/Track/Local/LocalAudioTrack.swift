@@ -28,6 +28,8 @@ public class LocalAudioTrack: Track, LocalTrack, AudioTrack {
     @objc
     public internal(set) var capturer: AudioCapturer?
 
+    var audioSource: LKRTCAudioBufferSource?
+
     /// ``AudioCaptureOptions`` used to create this track.
     let captureOptions: AudioCaptureOptions
 
@@ -54,6 +56,7 @@ public class LocalAudioTrack: Track, LocalTrack, AudioTrack {
     {
         self.capturer = capturer
         self.captureOptions = AudioCaptureOptions()
+        self.audioSource = audioSource
 
         let rtcTrack = RTC.createAudioTrack(source: audioSource)
 
