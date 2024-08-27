@@ -175,6 +175,10 @@ class RTC {
         DispatchQueue.liveKitWebRTC.sync { LKRTCVideoCapturer() }
     }
 
+    static func createAudioCapturer() -> LKRTCAudioCapturer {
+        DispatchQueue.liveKitWebRTC.sync { LKRTCAudioCapturer() }
+    }
+
     static func createRtpEncodingParameters(rid: String? = nil,
                                             encoding: MediaEncoding? = nil,
                                             scaleDownBy: Double? = nil,

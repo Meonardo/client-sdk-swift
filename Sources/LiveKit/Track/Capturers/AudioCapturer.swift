@@ -54,8 +54,8 @@ extension AudioCapturer {
     }
 
     // Capture a Data buffer
-    func capture(data: Data, sampleRate: UInt32, bitsPerChannel: UInt32, 
-    channels: UInt32, samplePerBuffer: UInt32, capturer: LKRTCAudioCapturer) {
+    func capture(data: Data, sampleRate: UInt, bitsPerChannel: UInt, 
+    channels: UInt, samplePerBuffer: UInt, capturer: LKRTCAudioCapturer) {
         
     }
 }
