@@ -30,12 +30,13 @@ public class AudioBufferCapturer: AudioCapturer {
 public extension LocalAudioTrack {
     /// Creates a track that can directly capture `CVPixelBuffer` or `Data` for convienience
     static func createBufferTrack(name: String = Track.screenShareAudioName,
-                                  reportStatistics: Bool = false) -> LocalAudioTrack
+                                source: Track.Source = Track.Source.screenShareAudio,
+                      reportStatistics: Bool = false) -> LocalAudioTrack
     {
         let audioSource = RTC.createAudioBufferSource(nil)
         let capturer = AudioBufferCapturer(delegate: audioSource)
         return LocalAudioTrack(name: name,
-                               source: Track.Source.screenShareAudio,
+                               source: source,
                                capturer: capturer,
                                audioSource: audioSource,
                                reportStatistics: reportStatistics)
